@@ -1,0 +1,54 @@
+html, body {
+	background-color: #f8f8f8;
+}
+
+*, html, body {
+    font-family: 'Monaco','Lucida Console',sans-serif;
+}
+
+h4 {
+    margin:0 0 10px 0;
+    font-size:3em;
+    color: #f7f1f1;
+}
+#header h1{
+    font-family: 'Times New Roman', Times, serif;
+    color: beige;
+}
+#header{
+    box-shadow: 8px 8px 5px grey;
+    padding: 5px;
+    width: 80%;
+}
+.ctrl{
+    background-color: #d4dddd;
+    float: right;
+    padding: 20px;
+}
+
+#testing-area {
+	width: 70%;
+	height: 85%;
+	border: 3px solid #cccccc;
+    padding: 20px;
+    margin:2% 0 0 5% ;
+    font-family: 'Times New Roman', Times, serif;
+    box-shadow: 8px 8px 5px grey;
+    background-color: white;
+    color:rgb(6, 35, 102);
+    
+}
+
+
+#chat{
+    position: fixed;
+    top:0;
+    right: 0;
+    height: 95%;
+    width: 20%;
+    background-color: #343a40;
+    box-shadow: 8px 8px 8px 8px grey;
+    overflow-y: auto;
+    
+}
+

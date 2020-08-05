@@ -2,7 +2,7 @@
 Simple collaborative editor using angular.js nodejs and socket.io, along with chat application<br />
 <br />
 # How to run.<br />
-git clone https://github.com/ srushti228 /collaborative-editor.git<br />
+git clone https://github.com/srushti228/collaborative-editor.git<br />
 
 npm install<br />
 sudo service mongob start</br>

@@ -1,0 +1,96 @@
+<html>
+<head>
+    <title>Textarea collaborative editor sample</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script defer src="http://localhost:5000/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.6/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script defer src="app.js"></script>
+    <link rel=stylesheet href="app.css"/>
+</head>
+<body>
+  
+  
+  <div id=main>
+    <div id="wrapper">
+        
+        <div id="header" style="background-color: #4caf50"> 
+            <h1>Collaborative Editor<span class="ctrl>"><button id="btn" style="float: right;" class="btn btn-outline-light" type="button" onclick="download()">Download</button><input style="float: right;" class="btn btn-outline-light" type="file" id="inputfile" /></span></h1>
+            
+        </div>
+        <div ng-app="serverExe" ng-controller="someCtrl">
+            <div id="editor">
+                <form novalidate="" method="POST" action="">
+                 <div style="background-color: #343a40;margin-top: 5px;" ><label style="color: aliceblue;font-family: 'Times New Roman', Times, serif;">Document name</label> <input name="doc_name" type="text" id="check" onkeyup="manage(this)">   
+                      <button  id="btSubmit" style="float: left ;" class="btn btn-outline-light" type="submit" onclick="alert('Data saved')" disabled>Save</button>
+                 </div>
+            <textarea autofocus="true" name="data" ng-model="results"  id="testing-area" onkeyup="input_update_callback();" placeholder="Insert text here" ></textarea>
+            
+              
+           
+            
+            
+        </form>
+    </div>
+             </div>
+            </div>      
+    </div>
+     
+    
+    <div id="chat">
+        
+            <div id="message-container" style="color: aliceblue;">
+            <form id="send-container">
+              <input  type="text" style="width: 15%;position: fixed;right: 5%;bottom:0px;" id="message-input">
+              <button type="submit" class="btn btn-dark" style="width: 5%;position: fixed;right: 0;bottom:0px;"   id="send-button">Send</button>
+            </form>
+          </div>
+          
+    </div>
+  <script src="/app.js"></script>
+    <script>
+      //to display the browsed file
+      var control = document.getElementById("inputfile"); 
+          control.addEventListener("change", function(event){ 
+              var reader = new FileReader();      
+              reader.onload = function(event){
+                  var contents = event.target.result;     
+                  document.getElementById('testing-area').value = contents;            
+              };      
+              reader.onerror = function(event){
+                  console.error("File could not be read! Code " + event.target.error.code);
+              };      
+              console.log("Filename: " + control.files[0].name);
+              reader.readAsText(control.files[0]);        
+          }, false);
+
+          //to save the file
+         function download(){
+                  var text = document.getElementById("testing-area").value;
+                  text = text.replace(/\n/g, "\r\n"); // To retain the Line breaks.
+                  var blob = new Blob([text], { type: "text/plain"});
+                  var anchor = document.createElement("a");
+                  anchor.download = "Text.txt";
+                  anchor.href = window.URL.createObjectURL(blob);
+                  anchor.target ="_blank";
+                  anchor.style.display = "none"; // just to be safe!
+                  document.body.appendChild(anchor);
+                  anchor.click();
+                  document.body.removeChild(anchor);
+              }
+              function manage(txt) {
+                var bt = document.getElementById('btSubmit');
+                if (txt.value != '') {
+                    bt.disabled = false;
+                }
+                else {
+                    bt.disabled = true;
+        }
+    }    
+            </script>
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
